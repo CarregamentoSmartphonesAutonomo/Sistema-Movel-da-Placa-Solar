@@ -6,5 +6,5 @@ Sistema responsável pelo rastreio da posição inicial do sol e movimentação 
     - Motor de Passo;
     - Microcontrolado **MSP430G2553IN20**;
     - Sensor de rastreio solar;
-    - Relógio.
+    - Relógio real.
 
