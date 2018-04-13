@@ -8,16 +8,17 @@
 #ifndef MSPFUNCTIONS_H_
 #define MSPFUNCTIONS_H_
 
-/*5 channels of ADC*/
+/* 5 channels of ADC */
 #define ADC_CHANNELS 2
 
-/* Define the port to ADC*/
+/* Define the port to ADC */
 #define AD_UP   BIT1
 #define AD_DOWN BIT4
 
-/* Initializing variable to store the ADCs*/
-unsigned int MESURES[ADC_CHANNELS] = { 0, 0 };
+/* Initializing variable to store the ADCs */
+unsigned int adc_mesure[ADC_CHANNELS] = { 0, 0 };
 
+/* Function to Initialize the ADC */
 void ADC_Init(void)
 {
     /* Configure the control register 0
@@ -26,7 +27,7 @@ void ADC_Init(void)
      * ADC10ON     - ADC10 On.
      * MSC         - Multiple sample and conversion.
      * */
-    ADC10CTL0 = SREF_0 + ADC10SHT_0 + ADC10ON + MSC;
+    ADC10CTL0 = SREF_0 + ADC10SHT_0 + ADC10ON + MSC + ADC10IE;
 
     /* Configure the control register 1
      * IN_AD_CH    -
@@ -43,6 +44,12 @@ void ADC_Init(void)
     /*Choosing the port to ADC*/
     ADC10AE0 = AD_UP + AD_DOWN;
 
+}
+
+/* ADC10 interrupt service routine */
+#pragma vector=ADC10_VECTOR
+__interrupt void ADC10_ISR (void){
+   __bic_SR_register_on_exit(CPUOFF); // Return to active mode
 }
 
 #endif /* MSPFUNCTIONS_H_ */
