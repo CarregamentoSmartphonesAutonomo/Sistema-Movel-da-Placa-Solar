@@ -15,9 +15,6 @@
 #define AD_UP   BIT1
 #define AD_DOWN BIT4
 
-/* Initializing variable to store the ADCs */
-unsigned int adc_mesure[ADC_CHANNELS] = { 0, 0 };
-
 /* Function to Initialize the ADC */
 void ADC_Init(void)
 {

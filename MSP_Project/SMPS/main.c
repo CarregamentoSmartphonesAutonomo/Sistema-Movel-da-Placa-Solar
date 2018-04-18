@@ -4,6 +4,8 @@
 #include <msp430.h> 
 #include "mspFunctions.h"
 
+
+
 int main(void){
 	WDTCTL = WDTPW | WDTHOLD;                       // Turn off the watchdog timer
 
@@ -11,8 +13,8 @@ int main(void){
 	BCSCTL1 = CALBC1_8MHZ;
 	DCOCTL = CALDCO_8MHZ;
 	
-	/*SMCLK = DCO = 8MHz*/
-	//BCSCTL2 &= DIVS_4; // SMCLK = DCO/8 = 1MHz
+	/* Initializing variable to store the ADCs */
+	unsigned int adc_mesure[ADC_CHANNELS] = { 0, 0 };
 
 	ADC_Init(); // Starting the ADC
 	__enable_interrupt(); // Enable interrupts.
