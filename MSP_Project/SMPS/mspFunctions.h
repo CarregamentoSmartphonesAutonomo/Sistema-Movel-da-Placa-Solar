@@ -12,8 +12,8 @@
 #define ADC_CHANNELS 2
 
 /* Define the port to ADC */
-#define AD_UP   BIT1
-#define AD_DOWN BIT4
+#define AD_UP   BIT0
+#define AD_DOWN BIT3
 
 /* Function to Initialize the ADC */
 void ADC_Init(void)
@@ -33,7 +33,7 @@ void ADC_Init(void)
      * CONSEQ_3    - Conversion Sequence Mode. (Single-channel-single-conversion)
      * SHS_0       - Sample and Hold Source Select.
      * */
-    ADC10CTL1 = INCH_1 + ADC10DIV_0 + ADC10SSEL_3 + CONSEQ_3 + SHS_0;
+    ADC10CTL1 = INCH_4 + ADC10DIV_0 + ADC10SSEL_3 + CONSEQ_3 + SHS_0;
 
     /*The number of transfers in each block*/
     ADC10DTC1 = ADC_CHANNELS;

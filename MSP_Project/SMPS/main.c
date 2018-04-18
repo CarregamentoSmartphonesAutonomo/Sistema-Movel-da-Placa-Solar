@@ -15,6 +15,7 @@ int main(void){
 	
 	/* Initializing variable to store the ADCs */
 	unsigned int adc_mesure[ADC_CHANNELS] = { 0, 0 };
+	volatile int mean = 0;
 
 	ADC_Init(); // Starting the ADC
 	__enable_interrupt(); // Enable interrupts.
@@ -27,6 +28,8 @@ int main(void){
         __delay_cycles(1000); // Wait for ADC Ref to settle
         ADC10CTL0 |= ENC + ADC10SC; // Sampling and conversion start
         __bis_SR_register(CPUOFF + GIE); // LPM0 with interrupts enabled
+
+        mean = adc_mesure[1] - adc_mesure[0];
 	}
 
 
