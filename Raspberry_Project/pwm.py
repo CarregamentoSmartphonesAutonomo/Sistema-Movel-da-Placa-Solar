@@ -11,9 +11,9 @@ IO.setmode(IO.BOARD)
 IO.setup(35, IO.OUT)
 IO.setup(36, IO.OUT)
 
-# GPIO 35, PWM de saida com frequência de 100Hz
-l = IO.PWM(35, 4096)
-r = IO.PWM(36, 4096)
+# GPIO 35, PWM de saida com frequencia de 100Hz
+l = IO.PWM(35, 100)
+r = IO.PWM(36, 100)
 
 # Gera o sinal do PWM com 0% de Duty Cycle
 l.start(0)
@@ -28,7 +28,7 @@ while 1:
         l.ChangeDutyCycle(a)
     if a<0:
         l.ChangeDutyCycle(0)
-        r.ChangeDutyCycle(a)
+        r.ChangeDutyCycle(-a)
     if a==0:
         r.ChangeDutyCycle(0)
         l.ChangeDutyCycle(0)

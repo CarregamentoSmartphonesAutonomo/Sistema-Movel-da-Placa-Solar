@@ -23,7 +23,7 @@ def config_IO(pwm1 = 35, pwm2 = 36, fimcurso1 = 37, midtower = 38, fimcurso2 = 4
         print('\tFim de Curso 2: Pin {}' .format(fimcurso2))
         print('Configuração concluida\n')
 
-def config_PWM(freq = 4096, IO1 = 35, IO2 = 37, verbose=False):
+def config_PWM(freq = 100, IO1 = 35, IO2 = 37, verbose=False):
     # GPIO 35, PWM de saida com frequência de 100Hz
     if verbose == True: print('Configurando o IO {} como PWM left e o IO {} como PWM rigth.' .format(IO1, IO2))
     l = IO.PWM(IO1, freq)
