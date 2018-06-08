@@ -1,14 +1,14 @@
 import pwm_functions as pf
 
 pf.config_IO()
-pf.config_PWM()
+r, l = pf.config_PWM()
 
 # # Modifica o Duty Cycle
 a = int(raw_input('PWM Duty Cycle: '))
 print('Inicio do movimento')
 
-pf.mov_inicial(a)
-pf.mov_mid(a)
-pf.mov_final(a)
+pf.mov_inicial(r, l, DC = a, verbose = True)
+pf.mov_mid(r, l, DC = a, verbose = True)
+pf.mov_final(r, l, DC = a, verbose = True)
 
 print('Fim do programa.')
