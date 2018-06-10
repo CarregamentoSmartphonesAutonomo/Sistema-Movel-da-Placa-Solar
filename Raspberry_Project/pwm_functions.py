@@ -36,41 +36,42 @@ def config_PWM(freq = 100, IO1 = 35, IO2 = 36, verbose=False):
 
     return l, r 
 
-def mov_inicial(r, l, DC=1, fimcurso1 = 37, midtower = 38, fimcurso2 = 40, verbose=False):
+def mov_inicial(r, l, DC=60, fimcurso1 = 37, midtower = 38, fimcurso2 = 40, verbose=False):
     if verbose == True: print('Iniciando cronometro.')
     time.sleep(1)
     if verbose == True: print('Iniciando o movimento.')
 
-    l.ChangeDutyCycle(DC)
+    r.ChangeDutyCycle(DC)
 
     while 1:
         if IO.input(fimcurso1) == IO.HIGH:
             if verbose == True: print('Fim do movimento.\n')
-            l.ChangeDutyCycle(0)
+            r.ChangeDutyCycle(0)
             break
 
-def mov_mid(r, l, DC=1, fimcurso1 = 37, midtower = 38, fimcurso2 = 40, tempo = 15, verbose=False):
+def mov_mid(r, l, DC=60, fimcurso1 = 37, midtower = 38, fimcurso2 = 40, tempo = 15, verbose=False):
     if verbose == True: print('Iniciando cronometro.')
     time.sleep(tempo)
     if verbose == True: print('Iniciando o movimento.')
     
-    r.ChangeDutyCycle(DC)
+    l.ChangeDutyCycle(DC)
 
     while 1:
         if IO.input(midtower) == IO.HIGH:
             if verbose == True: print('Fim do movimento.\n')
-            r.ChangeDutyCycle(0)
+            l.ChangeDutyCycle(0)
             break
 
-def mov_final(r, l, DC=1, fimcurso1 = 37, midtower = 38, fimcurso2 = 40, tempo = 15, verbose=False):
+def mov_final(r, l, DC=60, fimcurso1 = 37, midtower = 38, fimcurso2 = 40, tempo = 15, verbose=False):
     if verbose == True: print('Iniciando cronometro.')
     time.sleep(tempo)
     if verbose == True: print('Iniciando o movimento.')    
     
-    r.ChangeDutyCycle(DC)
+    l.ChangeDutyCycle(DC)
     
     while 1:
         if IO.input(fimcurso2) == IO.HIGH:
             if verbose == True: print('Fim do movimento.\n')
+            l.ChangeDutyCycle(0)
             r.ChangeDutyCycle(0)
             break
