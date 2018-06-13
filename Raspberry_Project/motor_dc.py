@@ -1,6 +1,6 @@
 import RPi.GPIO as IO
 
-def config_IO(pwm = 37, rele_1 = 35, rele_2 = 36):
+def config_IO(pwm = 35, rele_1 = 37, rele_2 = 38):
     # Desabilitar os avisos
     IO.setwarnings(False)
 
@@ -14,7 +14,7 @@ def config_IO(pwm = 37, rele_1 = 35, rele_2 = 36):
     print('Configurando os pinos')
 
 
-def direction(direct = 0, rele_1 = 35, rele_2 = 36):
+def direction(direct = 0, rele_1 = 37, rele_2 = 38):
     if(direct == 0):
         IO.output(rele_1, IO.HIGH)
         IO.output(rele_2, IO.HIGH)
@@ -22,7 +22,7 @@ def direction(direct = 0, rele_1 = 35, rele_2 = 36):
         IO.output(rele_1, IO.LOW)
         IO.output(rele_2, IO.LOW)
 
-def config_PWM(freq = 100, pwm = 37, verbose=False):
+def config_PWM(freq = 100, pwm = 35, verbose=False):
     # GPIO 35, PWM de saida com frequencia de 100Hz
     if verbose == True: print('Configurando o IO {} como PWM left e o IO {} como PWM rigth.' .format(IO1, IO2))
     p = IO.PWM(pwm, freq)
