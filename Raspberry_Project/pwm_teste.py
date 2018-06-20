@@ -4,11 +4,6 @@ import time
 import threading
 from multiprocessing.pool import ThreadPool
 
-dc.config_IO()
-direct = int(raw_input('On/Off: '))
-dc.direction(direct)
-p = dc.config_PWM()
-
 # Thread do sensor
 def sensor():
     global counter
@@ -36,24 +31,32 @@ def sensor():
 t = threading.Thread(target=sensor)
 t.start()
 
-for i in range(0,25):
-    p.ChangeDutyCycle(40) # Duty cicle de partida
-    time.sleep(.5)
-    p.ChangeDutyCycle(60) # Duty cicle de partida
-    time.sleep(.2)        
-    p.ChangeDutyCycle(0) # Duty cicle para o movimento
-    time.sleep(2)
-while 1:
-    DC = int(raw_input('Duty Cycle: '))
-    if DC != 0:
-        p.ChangeDutyCycle(DC) # Duty cicle de partida
-        time.sleep(.25)
-        # pwm.ChangeDutyCycle(35) # Duty cicle para o movimento
-        # time.sleep(.1)
-        p.ChangeDutyCycle(0) # Duty cicle para o movimento
-        time.sleep(9.75)
-    else:
-        break
+# Main
+dc.config_IO()
+dc.direction(0) # 0 ou 1 para trocar direcao
+p = dc.config_PWM()
+pos = 0
+while True:
+    pos += 1
+    if pos < 8
+        while counter != pos
+            p.ChangeDutyCycle(40) # Duty cicle de pré-partida
+            time.sleep(.5)
+            p.ChangeDutyCycle(60) # Duty cicle de partida
+            time.sleep(.2)        
+            p.ChangeDutyCycle(0) # Para movimento
+            time.sleep(2)
+        time.sleep(60)
+    else
+        pos = 0
+        dc.direction(1) 
+        while counter != pos
+            p.ChangeDutyCycle(15) # Duty cicle de pré-partida
+            time.sleep(.5)
+            p.ChangeDutyCycle(30) # Duty cicle de partida
+            time.sleep(.2)        
+            p.ChangeDutyCycle(0) # Para movimento
+            time.sleep(2)
+        dc.direction(0) 
 
-print('Fim do programa.')
 gpio.cleanup()
