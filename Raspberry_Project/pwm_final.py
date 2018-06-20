@@ -3,6 +3,7 @@ import motor_dc as dc
 import time
 import threading
 from multiprocessing.pool import ThreadPool
+from datetime import datetime
 
 # Thread do sensor
 def sensor():
@@ -37,7 +38,12 @@ dc.direction(0) # 0 ou 1 para trocar direcao
 p = dc.config_PWM()
 pos = 0
 while True:
-    pos += 1
+
+    h = datetime.time(datetime.now()).hour - 3 # hora considerando fuso horario
+    pos = h-8 # posicao de acordo com horario
+    if pos < 0:
+        pos = 0
+
     if pos < 8:
         while counter != pos:
             p.ChangeDutyCycle(40) # Duty cicle de pre-partida
@@ -57,6 +63,9 @@ while True:
             time.sleep(.2)        
             p.ChangeDutyCycle(0) # Para movimento
             time.sleep(2)
-        dc.direction(0) 
+        dc.direction(0)
+        while h < 8 or h > 16: # loop enquato estiver em um horário que a placa não se mexe
+            h = datetime.time(datetime.now()).hour - 3
+
 
 gpio.cleanup()
